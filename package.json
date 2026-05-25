@@ -4,7 +4,7 @@
   "description": "Minimalist storefront with integrated visual CMS",
   "main": "index.html",
   "scripts": {
-    "start": "npx -y http-server -p 3000 -o"
+    "start": "node server.js"
   },
   "dependencies": {},
   "devDependencies": {

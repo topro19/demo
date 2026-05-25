@@ -55,10 +55,30 @@ function initCartState() {
   }
 }
 
-// Write the global state back to localStorage
+// Write the global state back to localStorage and sync back to the server disk in real-time
 window.saveStoreStateToStorage = function() {
   localStorage.setItem("solstice_store_data", JSON.stringify(window.STORE_STATE));
-  // Global hooks can bind here if needed
+  
+  // Real-time backend sync to save changes directly back to products.js on disk!
+  fetch('/api/save-storefront-data', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(window.STORE_STATE)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      console.log("Storefront changes written directly to products.js on disk.");
+    } else {
+      console.warn("Failed to write to products.js:", data.error);
+    }
+  })
+  .catch(err => {
+    // If the server is offline or doesn't support the POST method, gracefully log it.
+    console.log("Local-only mode: changes saved to browser cache.");
+  });
 };
 
 // Write cart state to localStorage and re-render visual components
