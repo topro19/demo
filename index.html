@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOLSTICE STUDIO — Objects for the Slow Home</title>
+  <meta name="description" content="A curated collection of hand-thrown ceramics, raw linen textiles, and sculptural lighting, crafted in collaboration with independent artisans.">
+  
+  <!-- Premium Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Custom Styling -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar" id="announcement-bar-container">
+    <span data-cms-key="announcement" class="editable-text">Free shipping on orders over $150 • Crafted sustainably in small batches</span>
+  </div>
+
+  <!-- Main Navigation Header -->
+  <header class="main-header">
+    <div class="header-container">
+      
+      <!-- Mobile Menu Toggle -->
+      <button class="nav-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Brand Logo / Title -->
+      <div class="brand-logo">
+        <a href="#" id="brand-logo-link" data-cms-key="storeName" class="editable-text font-serif">SOLSTICE STUDIO</a>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="nav-menu" id="nav-menu-container">
+        <ul>
+          <li><a href="#" class="nav-link active" data-filter="all">Shop All</a></li>
+          <li><a href="#" class="nav-link" data-filter="ceramics" data-cms-key="category-1-name" class="editable-text">Artisanal Ceramics</a></li>
+          <li><a href="#" class="nav-link" data-filter="textiles" data-cms-key="category-2-name" class="editable-text">Organic Textiles</a></li>
+          <li><a href="#" class="nav-link" data-filter="lighting" data-cms-key="category-3-name" class="editable-text">Sculptural Lighting</a></li>
+          <li><a href="#philosophy-section" class="nav-link">Our Story</a></li>
+        </ul>
+      </nav>
+
+      <!-- Action Utilities (Search, Cart, Admin Status) -->
+      <div class="header-actions">
+        <!-- Search bar input -->
+        <div class="search-container" id="search-bar-container">
+          <input type="text" id="search-input" placeholder="Search collection...">
+          <button id="search-clear-btn" aria-label="Clear search" style="display:none;">&times;</button>
+        </div>
+        
+        <button class="action-btn" id="search-toggle-btn" aria-label="Search items">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </button>
+
+        <!-- Cart Button -->
+        <button class="action-btn cart-btn" id="cart-toggle-btn" aria-label="Open shopping cart">
+          <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+          <span class="cart-count" id="cart-count-badge">0</span>
+        </button>
+
+        <!-- Visual Lock Indicator for CMS Mode -->
+        <button class="action-btn admin-indicator-btn" id="admin-status-indicator" title="Staff Area - Click to login" aria-label="Staff login">
+          <svg class="icon lock-icon" id="admin-lock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+          <svg class="icon unlock-icon hidden" id="admin-unlock-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"></path></svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero-section-container">
+    <div class="hero-container">
+      <div class="hero-content">
+        <span class="hero-eyebrow editable-text" data-cms-key="hero-eyebrow">SUMMER COLLECTION</span>
+        <h1 class="hero-title editable-text" data-cms-key="hero-title">Objects for the slow, intentional home.</h1>
+        <p class="hero-subtitle editable-text" data-cms-key="hero-subtitle">A curated collection of hand-thrown ceramics, raw linen textiles, and sculptural lighting, crafted in collaboration with independent artisans.</p>
+        <div class="hero-actions">
+          <a href="#catalog-section" class="btn primary-btn editable-text" id="hero-cta-btn" data-cms-key="hero-cta">Explore the Collection</a>
+        </div>
+      </div>
+      <div class="hero-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?auto=format&fit=crop&w=1200&q=80" alt="Minimalist artisanal pottery showcase" class="hero-img">
+        <div class="hero-badge">100% Handcrafted</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shop Collections Categories cards -->
+  <section class="categories-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title editable-text" data-cms-key="categories-title">Shop by Collection</h2>
+        <p class="section-subtitle editable-text" data-cms-key="categories-subtitle">Thoughtfully designed items for daily rituals and quiet spaces.</p>
+      </div>
+      
+      <div class="categories-grid">
+        <!-- Ceramics -->
+        <a href="#catalog-section" class="category-card" data-category="ceramics">
+          <div class="category-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=600&q=80" alt="Ceramics category">
+          </div>
+          <div class="category-info">
+            <h3 class="editable-text" data-cms-key="category-1-name">Artisanal Ceramics</h3>
+            <span class="category-link">Shop Collection &rarr;</span>
+          </div>
+        </a>
+
+        <!-- Textiles -->
+        <a href="#catalog-section" class="category-card" data-category="textiles">
+          <div class="category-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1580301762395-21ce84d00bc6?auto=format&fit=crop&w=600&q=80" alt="Textiles category">
+          </div>
+          <div class="category-info">
+            <h3 class="editable-text" data-cms-key="category-2-name">Organic Textiles</h3>
+            <span class="category-link">Shop Collection &rarr;</span>
+          </div>
+        </a>
+
+        <!-- Lighting -->
+        <a href="#catalog-section" class="category-card" data-category="lighting">
+          <div class="category-img-wrapper">
+            <img src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=600&q=80" alt="Lighting category">
+          </div>
+          <div class="category-info">
+            <h3 class="editable-text" data-cms-key="category-3-name">Sculptural Lighting</h3>
+            <span class="category-link">Shop Collection &rarr;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Store Catalogue Section -->
+  <section class="catalog-section" id="catalog-section">
+    <div class="container">
+      
+      <div class="section-header catalog-header">
+        <div>
+          <h2 class="section-title editable-text" data-cms-key="catalog-title">The Full Collection</h2>
+          <p class="section-subtitle editable-text" data-cms-key="catalog-subtitle">Honest materials and timeless design.</p>
+        </div>
+        
+        <!-- Filter Controls -->
+        <div class="filter-controls" id="catalog-filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="ceramics">Ceramics</button>
+          <button class="filter-btn" data-filter="textiles">Textiles</button>
+          <button class="filter-btn" data-filter="lighting">Lighting</button>
+        </div>
+      </div>
+
+      <!-- Active Search Details Banner -->
+      <div class="search-results-banner hidden" id="search-banner">
+        <span>Search results for: "<strong id="search-query-display">Vessel</strong>"</span>
+        <button id="clear-search-banner-btn">Clear Filter</button>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid" id="products-grid-container">
+        <!-- Rendered dynamically by app.js -->
+        <div class="loading-state">Loading curated objects...</div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- Brand Philosophy Section (Story) -->
+  <section class="philosophy-section" id="philosophy-section">
+    <div class="container philosophy-container">
+      <div class="philosophy-image">
+        <img src="https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&w=1000&q=80" alt="Sustainable artisan material craft">
+        <div class="philosophy-quote">"True sustainability is making things that are meant to last a lifetime."</div>
+      </div>
+      
+      <div class="philosophy-content">
+        <span class="philosophy-eyebrow editable-text" data-cms-key="philosophy-eyebrow">OUR VALUES</span>
+        <h2 class="philosophy-title editable-text" data-cms-key="philosophy-title">Crafted by hand, shaped by nature.</h2>
+        <p class="philosophy-text editable-text" data-cms-key="philosophy-p1">We believe that the objects we surround ourselves with carry energy. That is why every piece in the Solstice collection is made slowly, by hand, using raw and sustainably sourced materials.</p>
+        <p class="philosophy-text editable-text" data-cms-key="philosophy-p2">By partnering with local workshops and multi-generational artisans, we preserve traditional heritage techniques while designing modern pieces that are made to outlast trends and be passed down through generations.</p>
+        
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-num editable-text" data-cms-key="philosophy-stat1-num">100%</div>
+            <div class="stat-label editable-text" data-cms-key="philosophy-stat1-label">Traceable Supply Chain</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num editable-text" data-cms-key="philosophy-stat2-num">24</div>
+            <div class="stat-label editable-text" data-cms-key="philosophy-stat2-label">Independent Craftspeople</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num editable-text" data-cms-key="philosophy-stat3-num">0</div>
+            <div class="stat-label editable-text" data-cms-key="philosophy-stat3-label">Plastics or Synthetic Dyes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Editorial Lifestyle Instagram Grid -->
+  <section class="gallery-section">
+    <div class="container">
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=600&q=80" alt="Artisanal ceramic detail in sunlight">
+        </div>
+        <div class="gallery-item wide">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80" alt="Minimal kitchen shelving layout">
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=600&q=80" alt="Soft linen bed textiles detail">
+        </div>
+        <div class="gallery-item tall">
+          <img src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?auto=format&fit=crop&w=600&q=80" alt="Sculptural lighting glowing evening">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Brand / Newsletter -->
+        <div class="footer-brand-col">
+          <span class="footer-logo font-serif">SOLSTICE STUDIO</span>
+          <h4 class="newsletter-title editable-text" data-cms-key="footer-newsletter-title">Join the Journal</h4>
+          <p class="newsletter-desc editable-text" data-cms-key="footer-newsletter-desc">Subscribe for early access to new collections, artisan stories, and interior inspiration.</p>
+          <form class="newsletter-form" id="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to our journal.'); this.reset();">
+            <input type="email" placeholder="Your email address" required aria-label="Email Address">
+            <button type="submit" class="newsletter-submit-btn editable-text" data-cms-key="footer-newsletter-btn">Subscribe</button>
+          </form>
+        </div>
+
+        <!-- Links Column 1 -->
+        <div class="footer-links-col">
+          <h5 class="footer-col-title editable-text" data-cms-key="footer-col1-title">Explore</h5>
+          <ul>
+            <li><a href="#" data-filter="all">All Products</a></li>
+            <li><a href="#" data-filter="ceramics">Ceramics Collection</a></li>
+            <li><a href="#" data-filter="textiles">Linen Textiles</a></li>
+            <li><a href="#" data-filter="lighting">Sculptural Lamps</a></li>
+          </ul>
+        </div>
+
+        <!-- Links Column 2 -->
+        <div class="footer-links-col">
+          <h5 class="footer-col-title editable-text" data-cms-key="footer-col2-title">Customer Care</h5>
+          <ul>
+            <li><a href="#shipping-faq">Shipping & Returns</a></li>
+            <li><a href="#sustainability">Care Instructions</a></li>
+            <li><a href="#contact">Contact Support</a></li>
+            <li><a href="#faq">Frequently Asked Questions</a></li>
+          </ul>
+        </div>
+
+        <!-- Links Column 3 -->
+        <div class="footer-links-col">
+          <h5 class="footer-col-title editable-text" data-cms-key="footer-col3-title">Our Studio</h5>
+          <ul>
+            <li><a href="#philosophy-section">Our Philosophy</a></li>
+            <li><a href="#artisans">The Craftspeople</a></li>
+            <li><a href="#journal">Read Journal</a></li>
+            <li><a href="#careers">Collaborations</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span class="copyright editable-text" data-cms-key="footer-copyright">© 2026 Solstice Studio. All rights reserved. Created with intention.</span>
+        <!-- CMS Access Link -->
+        <button class="admin-portal-link" id="cms-portal-footer-link" data-cms-key="footer-admin-link">Staff Portal</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================== -->
+  <!--               DRAWERS & MODALS                -->
+  <!-- ============================================== -->
+
+  <!-- Shopping Cart Drawer (Right Slide-out) -->
+  <div class="drawer-overlay" id="cart-drawer-overlay"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-hidden="true">
+    <div class="drawer-header">
+      <h3>Your Cart</h3>
+      <button class="drawer-close-btn" id="cart-drawer-close" aria-label="Close cart">&times;</button>
+    </div>
+    
+    <!-- Empty Cart State -->
+    <div class="cart-empty-state" id="cart-empty-view">
+      <svg class="empty-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+      <p>Your cart is empty</p>
+      <button class="btn secondary-btn" id="cart-empty-continue-btn">Continue Browsing</button>
+    </div>
+
+    <!-- Active Cart Items View -->
+    <div class="cart-active-view hidden" id="cart-active-view">
+      <div class="cart-items-list" id="cart-items-container">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+      
+      <div class="cart-footer">
+        <div class="cart-summary-row">
+          <span>Shipping</span>
+          <span class="shipping-value" id="cart-shipping-cost">Calculated at checkout</span>
+        </div>
+        <div class="cart-summary-row total-row">
+          <span>Subtotal</span>
+          <span class="subtotal-value" id="cart-subtotal-price">$0.00</span>
+        </div>
+        <p class="cart-tax-notice">Taxes and shipping calculated at checkout.</p>
+        <button class="btn primary-btn checkout-btn" id="proceed-checkout-btn">Proceed to Checkout</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Product Detail Drawer (Right Slide-out) -->
+  <div class="drawer-overlay" id="detail-drawer-overlay"></div>
+  <aside class="detail-drawer" id="detail-drawer" aria-hidden="true">
+    <button class="drawer-close-btn detail-close-btn" id="detail-drawer-close" aria-label="Close details">&times;</button>
+    
+    <div class="detail-drawer-content" id="detail-drawer-content-container">
+      <!-- Dynamic detailed content rendered by app.js -->
+    </div>
+  </aside>
+
+  <!-- Checkout Dialog Modal -->
+  <div class="modal-overlay" id="checkout-modal-overlay"></div>
+  <div class="modal checkout-modal" id="checkout-modal" role="dialog" aria-modal="true">
+    <button class="modal-close-btn" id="checkout-modal-close" aria-label="Close checkout">&times;</button>
+    
+    <div class="checkout-grid" id="checkout-form-container">
+      <!-- Order Form Left -->
+      <div class="checkout-form-side">
+        <h3 class="font-serif">Shipping Details</h3>
+        <form id="checkout-form" onsubmit="event.preventDefault(); window.submitMockCheckout();">
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="checkout-email">Email Address</label>
+              <input type="email" id="checkout-email" required placeholder="name@domain.com">
+            </div>
+          </div>
+          
+          <div class="form-row split">
+            <div class="form-group">
+              <label for="checkout-firstname">First Name</label>
+              <input type="text" id="checkout-firstname" required placeholder="John">
+            </div>
+            <div class="form-group">
+              <label for="checkout-lastname">Last Name</label>
+              <input type="text" id="checkout-lastname" required placeholder="Doe">
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="checkout-address">Delivery Address</label>
+              <input type="text" id="checkout-address" required placeholder="123 quiet lane">
+            </div>
+          </div>
+          
+          <div class="form-row split-three">
+            <div class="form-group">
+              <label for="checkout-city">City</label>
+              <input type="text" id="checkout-city" required placeholder="Copenhagen">
+            </div>
+            <div class="form-group">
+              <label for="checkout-postal">Postal Code</label>
+              <input type="text" id="checkout-postal" required placeholder="1000">
+            </div>
+            <div class="form-group">
+              <label for="checkout-country">Country</label>
+              <input type="text" id="checkout-country" required placeholder="Denmark">
+            </div>
+          </div>
+          
+          <h3 class="font-serif mt-4">Mock Payment</h3>
+          <p class="form-notice">This is a secure mock demo checkout. Do not enter real credit card details.</p>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="checkout-cardnum">Card Number</label>
+              <input type="text" id="checkout-cardnum" required placeholder="4000 1234 5678 9010" value="4000 1234 5678 9010">
+            </div>
+          </div>
+          
+          <div class="form-row split">
+            <div class="form-group">
+              <label for="checkout-cardexpiry">Expiry Date</label>
+              <input type="text" id="checkout-cardexpiry" required placeholder="MM/YY" value="12/28">
+            </div>
+            <div class="form-group">
+              <label for="checkout-cardcvv">CVV</label>
+              <input type="text" id="checkout-cardcvv" required placeholder="000" value="123">
+            </div>
+          </div>
+          
+          <button type="submit" class="btn primary-btn w-full mt-4" id="submit-checkout-btn">Complete Purchase</button>
+        </form>
+      </div>
+      
+      <!-- Order Summary Right -->
+      <div class="checkout-summary-side">
+        <h3 class="font-serif">Order Summary</h3>
+        <div class="checkout-items-list" id="checkout-summary-items">
+          <!-- Rendered dynamically -->
+        </div>
+        <div class="checkout-totals">
+          <div class="totals-row">
+            <span>Subtotal</span>
+            <span id="checkout-subtotal">$0.00</span>
+          </div>
+          <div class="totals-row">
+            <span>Shipping</span>
+            <span id="checkout-shipping">Free</span>
+          </div>
+          <hr>
+          <div class="totals-row grand-total">
+            <span>Total</span>
+            <span id="checkout-total">$0.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success State View (Hidden by default) -->
+    <div class="checkout-success-view hidden" id="checkout-success-container">
+      <svg class="success-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      <h2 class="font-serif">Thank you for your order.</h2>
+      <p>We are preparing your handcrafted package. An order confirmation has been simulated and sent to your email.</p>
+      <p class="order-ref">Order reference: <strong>#SOL-285910</strong></p>
+      <button class="btn primary-btn mt-4" id="checkout-success-close-btn">Return to Storefront</button>
+    </div>
+  </div>
+
+  <!-- Staff Portal CMS Login Modal -->
+  <div class="modal-overlay" id="admin-login-overlay"></div>
+  <div class="modal admin-login-modal" id="admin-login-modal" role="dialog" aria-modal="true">
+    <button class="modal-close-btn" id="admin-login-close" aria-label="Close login">&times;</button>
+    
+    <div class="admin-login-content">
+      <span class="login-badge">SOLSTICE CMS</span>
+      <h2 class="font-serif">Staff Portal</h2>
+      <p class="login-subtitle">Unlock custom layouts, product catalogue settings, and real-time visual website builder controls.</p>
+      
+      <form id="admin-login-form">
+        <div class="form-group">
+          <label for="admin-username">Username</label>
+          <input type="text" id="admin-username" required placeholder="Enter username" autocomplete="username">
+        </div>
+        
+        <div class="form-group">
+          <label for="admin-password">Password</label>
+          <input type="password" id="admin-password" required placeholder="••••••••" autocomplete="current-password">
+        </div>
+        
+        <div class="error-msg hidden" id="login-error-msg">Incorrect credentials. Please try again.</div>
+        
+        <button type="submit" class="btn primary-btn w-full mt-2" id="login-submit-btn">Unlock Studio CMS</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- In-Context Text Editor Modal (Triggered by clicking editable items) -->
+  <div class="modal-overlay" id="inline-editor-overlay"></div>
+  <div class="modal inline-editor-modal" id="inline-editor-modal" role="dialog" aria-modal="true">
+    <div class="editor-header">
+      <h4>Edit Text Content</h4>
+      <span class="editor-key-label" id="editor-node-key">Key: placeholder-key</span>
+    </div>
+    <div class="editor-body">
+      <div class="form-group">
+        <label for="editor-textarea">Content</label>
+        <textarea id="editor-textarea" rows="4"></textarea>
+      </div>
+    </div>
+    <div class="editor-actions">
+      <button class="btn secondary-btn" id="inline-editor-cancel">Cancel</button>
+      <button class="btn primary-btn" id="inline-editor-save">Save Changes</button>
+    </div>
+  </div>
+
+  <!-- Global Toast Alert System -->
+  <div class="toast-notification" id="toast-message-box">Changes saved to LocalStorage.</div>
+
+
+  <!-- ============================================== -->
+  <!--            FLOATING STUDIO CMS PANEL           -->
+  <!-- ============================================== -->
+  <div class="studio-cms-panel collapsed hidden" id="studio-cms-panel">
+    
+    <!-- Collapsed CMS Ribbon / Header -->
+    <div class="studio-panel-header" id="studio-panel-toggle-header">
+      <div class="header-title">
+        <span class="pulsing-indicator"></span>
+        <strong>Studio CMS Active</strong>
+      </div>
+      <div class="header-actions">
+        <button class="panel-minimize-btn" id="studio-panel-collapse-btn" title="Collapse / Expand Panel">
+          <!-- Chevron Up/Down Icon -->
+          <svg class="chevron-icon" id="studio-panel-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- CMS Content Panel (Visible when expanded) -->
+    <div class="studio-panel-body">
+      
+      <!-- Tabs Navigation -->
+      <div class="studio-tabs">
+        <button class="studio-tab active" data-tab="tab-catalogue">Catalog Manager</button>
+        <button class="studio-tab" data-tab="tab-settings">Store Brand</button>
+        <button class="studio-tab" data-tab="tab-data">Data Backups</button>
+      </div>
+
+      <!-- Tab Content: Catalogue Manager -->
+      <div class="studio-tab-content active" id="tab-catalogue">
+        <div class="cms-section-toolbar">
+          <span>Manage your storefront catalog in real-time. Add or edit products.</span>
+          <button class="btn primary-btn sm-btn" id="cms-add-product-btn">+ Add Product</button>
+        </div>
+        
+        <div class="cms-products-table-wrapper">
+          <table class="cms-products-table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="cms-products-list-body">
+              <!-- Loaded dynamically by admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab Content: Store Settings -->
+      <div class="studio-tab-content" id="tab-settings">
+        <p class="cms-tab-description">Modify global brand typography, naming, and theme variables across the site.</p>
+        
+        <form id="cms-global-settings-form" onsubmit="event.preventDefault(); window.saveCmsGlobalSettings();">
+          <div class="form-row split">
+            <div class="form-group">
+              <label for="cms-setting-storename">Store Brand Name</label>
+              <input type="text" id="cms-setting-storename" required>
+            </div>
+            <div class="form-group">
+              <label for="cms-setting-tagline">Store Subtitle / Tagline</label>
+              <input type="text" id="cms-setting-tagline" required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cms-setting-announcement">Top Bar Announcement Text</label>
+              <input type="text" id="cms-setting-announcement" required>
+            </div>
+          </div>
+          
+          <div class="form-row split">
+            <div class="form-group">
+              <label for="cms-setting-color">Accent Color Theme (HEX)</label>
+              <div class="color-picker-group">
+                <input type="color" id="cms-setting-color-picker">
+                <input type="text" id="cms-setting-color" required placeholder="#4A533C">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Layout Options</label>
+              <div class="checkbox-group">
+                <label class="cms-checkbox-label">
+                  <input type="checkbox" id="cms-setting-featured-only" checked>
+                  Hide out of stock items
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn primary-btn w-full mt-2">Apply Global Theme & Name Changes</button>
+        </form>
+      </div>
+
+      <!-- Tab Content: Data Backups (Import / Export JSON) -->
+      <div class="studio-tab-content" id="tab-data">
+        <p class="cms-tab-description">Export or backup your entire website content, catalogue, and text modifications. You can save the exported JSON to transfer this storefront setup to another system, or reset to factory defaults.</p>
+        
+        <div class="backup-actions">
+          <button class="btn secondary-btn" id="cms-export-btn">Export Site Data (JSON)</button>
+          <button class="btn secondary-btn" id="cms-import-trigger-btn">Import Site Data (JSON)</button>
+          <button class="btn danger-btn" id="cms-reset-btn">Reset Store to Defaults</button>
+        </div>
+        
+        <input type="file" id="cms-import-file-input" accept=".json" class="hidden">
+        
+        <div class="backup-textarea-wrapper mt-3">
+          <label for="cms-json-data-textarea">View Raw State JSON</label>
+          <textarea id="cms-json-data-textarea" readonly rows="5" placeholder="JSON data will appear here when you click Export."></textarea>
+          <button class="btn secondary-btn sm-btn w-full mt-1" id="cms-copy-json-btn">Copy JSON to Clipboard</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CMS Footer Buttons -->
+    <div class="studio-panel-footer">
+      <span>Editing Active • Double click elements to edit text directly</span>
+      <button class="btn secondary-btn sm-btn" id="cms-logout-btn">Log Out & Exit</button>
+    </div>
+  </div>
+
+  <!-- Product Creator/Editor Modal Modal (Called from CMS Catalogue tab) -->
+  <div class="modal-overlay" id="product-editor-modal-overlay"></div>
+  <div class="modal product-editor-modal" id="product-editor-modal" role="dialog" aria-modal="true">
+    <button class="modal-close-btn" id="product-editor-modal-close" aria-label="Close product editor">&times;</button>
+    
+    <div class="product-editor-content">
+      <h3 class="font-serif" id="product-editor-title">Add Curated Product</h3>
+      <p class="subtitle" id="product-editor-subtitle">Populate your e-commerce catalogue instantly. All changes reflect in real-time.</p>
+      
+      <form id="cms-product-form" onsubmit="event.preventDefault(); window.saveCmsProductForm();">
+        <input type="hidden" id="cms-prod-id">
+        
+        <div class="form-row split">
+          <div class="form-group">
+            <label for="cms-prod-name">Product Name</label>
+            <input type="text" id="cms-prod-name" required placeholder="e.g. Clay Organic Plate">
+          </div>
+          <div class="form-group">
+            <label for="cms-prod-price">Retail Price ($)</label>
+            <input type="number" id="cms-prod-price" step="0.01" min="0" required placeholder="e.g. 55.00">
+          </div>
+        </div>
+        
+        <div class="form-row split">
+          <div class="form-group">
+            <label for="cms-prod-category">Collection Category</label>
+            <select id="cms-prod-category" required>
+              <option value="ceramics">Artisanal Ceramics</option>
+              <option value="textiles">Organic Textiles</option>
+              <option value="lighting">Sculptural Lighting</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cms-prod-inventory">Stock Count (Inventory)</label>
+            <input type="number" id="cms-prod-inventory" min="0" required placeholder="e.g. 10">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cms-prod-desc">Product Narrative / Description</label>
+            <textarea id="cms-prod-desc" required rows="3" placeholder="Tell the slow crafting story of the object..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-row split">
+          <div class="form-group">
+            <label for="cms-prod-image">Primary Image</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="cms-prod-image" required placeholder="URL or uploaded image data..." style="flex-grow: 1;">
+              <label class="btn secondary-btn sm-btn" style="white-space: nowrap; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin: 0; padding: 10px 14px;">
+                Upload
+                <input type="file" accept="image/*" id="cms-upload-primary-btn" style="display: none;">
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="cms-prod-secondaryImage">Secondary Image (Optional)</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="cms-prod-secondaryImage" placeholder="URL or uploaded image data..." style="flex-grow: 1;">
+              <label class="btn secondary-btn sm-btn" style="white-space: nowrap; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; margin: 0; padding: 10px 14px;">
+                Upload
+                <input type="file" accept="image/*" id="cms-upload-secondary-btn" style="display: none;">
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row split">
+          <div class="form-group">
+            <label for="cms-prod-materials">Craft Materials</label>
+            <input type="text" id="cms-prod-materials" placeholder="e.g. 100% Terracotta Clay, matte interior glaze">
+          </div>
+          <div class="form-group">
+            <label for="cms-prod-dimensions">Physical Dimensions</label>
+            <input type="text" id="cms-prod-dimensions" placeholder="e.g. H: 12cm, W: 15cm">
+          </div>
+        </div>
+        
+        <div class="form-row checkbox-row">
+          <label class="cms-checkbox-label">
+            <input type="checkbox" id="cms-prod-featured">
+            Feature this product on homepage list
+          </label>
+        </div>
+
+        <div class="product-editor-actions mt-3">
+          <button type="button" class="btn secondary-btn" id="cms-product-form-cancel">Cancel</button>
+          <button type="submit" class="btn primary-btn" id="cms-product-form-submit">Save Product to Catalogue</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Loading State Spinner Overlay -->
+  <div id="global-loading-spinner" class="global-spinner hidden">
+    <div class="spinner"></div>
+    <span id="global-loading-text">Applying settings...</span>
+  </div>
+
+  <!-- Load Scripts Sequentially (Global variable bindings to support local running) -->
+  <script src="products.js"></script>
+  <script src="app.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

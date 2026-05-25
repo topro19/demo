@@ -1,0 +1,13 @@
+{
+  "name": "solstice-studio",
+  "version": "1.0.0",
+  "description": "Minimalist storefront with integrated visual CMS",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx -y http-server -p 3000 -o"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
