@@ -2297,3 +2297,21 @@ body.cms-mode-active .editable-text:hover::before {
 .form-row.checkbox-row {
   margin: 16px 0;
 }
+
+/* Dense styling for shorter viewports to keep save buttons visible without scrolling */
+@media (max-height: 800px) {
+  .modal {
+    padding: 20px 30px !important;
+  }
+  .product-editor-content .subtitle {
+    margin-bottom: 12px !important;
+  }
+  .form-group {
+    margin-bottom: 12px !important;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 8px 12px !important;
+  }
+}

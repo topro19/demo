@@ -4,7 +4,7 @@
    ========================================================================== */
 
 // --- SESSION STATE CHECKER ---
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("storefrontStateLoaded", () => {
   initCmsState();
   setupCmsListeners();
 });

@@ -39,6 +39,7 @@ function initStoreState(onComplete) {
     .then(data => {
       window.STORE_STATE = data;
       localStorage.setItem("solstice_store_data", JSON.stringify(data));
+      document.dispatchEvent(new Event("storefrontStateLoaded"));
       if (onComplete) onComplete();
     })
     .catch(err => {
@@ -53,6 +54,7 @@ function initStoreState(onComplete) {
       } else {
         window.STORE_STATE = JSON.parse(JSON.stringify(window.DEFAULT_STORE_DATA));
       }
+      document.dispatchEvent(new Event("storefrontStateLoaded"));
       if (onComplete) onComplete();
     });
 }
