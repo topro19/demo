@@ -9,37 +9,63 @@ window.CART_STATE = [];
 window.ACTIVE_CATEGORY = "all";
 window.ACTIVE_SEARCH_QUERY = "";
 
+// Global Cloud Database Storage Endpoint for Render Production Sync
+const CLOUD_DB_URL = 'https://kvdb.io/solstice_db_8bd07ae8b_v1/store_state';
+
 // 1. Initial Launch Bootstrapper
 document.addEventListener("DOMContentLoaded", () => {
-  initStoreState();
-  initCartState();
-  applyStoreBranding();
-  renderStoreTexts();
-  renderProductCatalog();
-  updateCartBadge();
-  setupEventListeners();
+  initStoreState(() => {
+    initCartState();
+    applyStoreBranding();
+    renderStoreTexts();
+    renderProductCatalog();
+    updateCartBadge();
+    setupEventListeners();
+  });
 });
 
-// Initialize dynamic storefront state from localStorage or products.js defaults
-function initStoreState() {
-  const savedState = localStorage.getItem("solstice_store_data");
-  if (savedState) {
-    try {
-      window.STORE_STATE = JSON.parse(savedState);
-      // Backwards compatibility validation for new schema variables
-      if (!window.STORE_STATE.settings || !window.STORE_STATE.products) {
-        throw new Error("Invalid state schema");
+// Initialize dynamic storefront state by fetching from our live cloud database (or local cache on failure)
+function initStoreState(onComplete) {
+  // Try loading from our live cloud database first so it syncs for everyone in real-time!
+  fetch(CLOUD_DB_URL)
+    .then(response => {
+      if (response.status === 404) {
+        // If the cloud database is new/empty, automatically bootstrap it with our default values!
+        console.log("Cloud storage empty. Bootstrapping with default data...");
+        return bootstrapCloudDatabase().then(() => window.DEFAULT_STORE_DATA);
       }
-    } catch (e) {
-      console.warn("Storage data corrupted. Resetting to defaults.", e);
-      window.STORE_STATE = JSON.parse(JSON.stringify(window.DEFAULT_STORE_DATA));
-      localStorage.setItem("solstice_store_data", JSON.stringify(window.STORE_STATE));
-    }
-  } else {
-    // Fresh launch
-    window.STORE_STATE = JSON.parse(JSON.stringify(window.DEFAULT_STORE_DATA));
-    localStorage.setItem("solstice_store_data", JSON.stringify(window.STORE_STATE));
-  }
+      return response.json();
+    })
+    .then(data => {
+      window.STORE_STATE = data;
+      localStorage.setItem("solstice_store_data", JSON.stringify(data));
+      if (onComplete) onComplete();
+    })
+    .catch(err => {
+      console.warn("Cloud offline, loading from local cache fallback:", err);
+      const savedState = localStorage.getItem("solstice_store_data");
+      if (savedState) {
+        try {
+          window.STORE_STATE = JSON.parse(savedState);
+        } catch (e) {
+          window.STORE_STATE = JSON.parse(JSON.stringify(window.DEFAULT_STORE_DATA));
+        }
+      } else {
+        window.STORE_STATE = JSON.parse(JSON.stringify(window.DEFAULT_STORE_DATA));
+      }
+      if (onComplete) onComplete();
+    });
+}
+
+// Write default products/texts to the cloud bucket to initialize the database
+function bootstrapCloudDatabase() {
+  return fetch(CLOUD_DB_URL, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(window.DEFAULT_STORE_DATA)
+  });
 }
 
 // Initialize shopping cart state from localStorage
@@ -59,7 +85,7 @@ function initCartState() {
 window.saveStoreStateToStorage = function() {
   localStorage.setItem("solstice_store_data", JSON.stringify(window.STORE_STATE));
   
-  // Real-time backend sync to save changes directly back to products.js on disk!
+  // 1. Real-time backend sync to save changes directly back to products.js on disk!
   fetch('/api/save-storefront-data', {
     method: 'POST',
     headers: {
@@ -71,13 +97,25 @@ window.saveStoreStateToStorage = function() {
   .then(data => {
     if (data.success) {
       console.log("Storefront changes written directly to products.js on disk.");
-    } else {
-      console.warn("Failed to write to products.js:", data.error);
     }
   })
   .catch(err => {
-    // If the server is offline or doesn't support the POST method, gracefully log it.
     console.log("Local-only mode: changes saved to browser cache.");
+  });
+  
+  // 2. Real-time live cloud sync to KVdb.io for Render production deployment!
+  fetch(CLOUD_DB_URL, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(window.STORE_STATE)
+  })
+  .then(() => {
+    console.log("Cloud database updated successfully.");
+  })
+  .catch(err => {
+    console.error("Failed to sync cloud database:", err);
   });
 };
 
